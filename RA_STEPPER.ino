@@ -1,4 +1,5 @@
 //Librerias
+
 #include <DueTimer.h>
 
 //Variables
@@ -15,8 +16,10 @@ int x_value=0;
 int y_value=0;
 
 boolean state=0;
+
 long  cont1;
 long tmp=31500;
+
 string lect="";
 string inString="";
 
@@ -42,7 +45,7 @@ manual();
 
 void lectura(){
 lect=Serial.readStringUntil(\n);
-	if(lect=="RA+"||lect=="ra+"lect=="Ra+"lect=="rA+")
+	if(lect=="RA+"||lect=="ra+"||lect=="Ra+"||lect=="rA+")
 			{
 			lect="";							
 			Timer3.stop();
@@ -52,7 +55,7 @@ lect=Serial.readStringUntil(\n);
 			Serial.println(tmp);
 			Timer3.attachInterrupt(ra).start(tmp);
 			}
-	if(lect=="RA-"||lect=="ra-"||lect=="Ra-"lect=="rA-")
+	if(lect=="RA-"||lect=="ra-"||lect=="Ra-"||lect=="rA-")
 			{
 			lect="";
 			Timer3.stop();

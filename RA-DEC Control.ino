@@ -16,12 +16,15 @@ int x_value=0;
 int y_value=0;
 
 boolean state=0;
+boolean state2=0;
 
 long  cont1;
+long  cont2;
 
 long tmp=31500;
 
 long tmp2=100000;
+
 string lect="";
 string inString="";
 

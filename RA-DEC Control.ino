@@ -12,6 +12,9 @@
 #define x_axis A0
 #define y_axis A1
 
+long HHRA,MMRA,SSRA;
+
+
 int x_value=0;
 int y_value=0;
 
@@ -43,12 +46,18 @@ pinMode(dir2,OUTPUT);	//*****
 pinMode(ena1,OUTPUT);	//*****
 pinMode(ena2,OUTPUT);	//*****
 Timer3.attachInterrupt(ra).start(tmp);  //Llamo a RA cada tmp [ms]
-Timer4.attachInterrupt(dec).start(tmp2)
+Timer4.attachInterrupt(dec).start(tmp2);
+
+HHRA=0;
+MMRA=0;
+SSRA=0;
+
 }
 
 void loop ()
 {
 lectura();
+getObj();
 mode();	
 manual();
 comparacion();
@@ -56,16 +65,18 @@ comparacion();
 }
 
 void lectura(){
-lect=Serial.readStringUntil(\n);
-	if(lect==':GR#'){
+	
+lect=Serial.readStringUntil('#'||'\n');
+	if(lect==":GR#"){
 		
 	}
-	if(lect==':Gr#'){
+	if(lect==":Gr#"){
+		
 	}
-	if(lect==':GD#'){
+	if(lect==":GD#"){
 	
 	}
-	if(lect==':Gd#'){
+	if(lect==":Gd#"){
 		
 	}
 
@@ -149,8 +160,8 @@ lect=Serial.readStringUntil(\n);
 
 void manual()
 {
-	x_value=analog.Read(x_axis);
-	y_value=analog.Read(y_axis);
+	x_value=analogRead(x_axis);
+	y_value=analogRead(y_axis);
 	
 if(x_value>750||x_value<450||y_value>750||y_value<450)
    {
@@ -170,7 +181,7 @@ if(x_value>750||x_value<450||y_value>750||y_value<450)
 		digitalWrite(stp1,0);
 		delayMicroseconds(200);
 	}
-	while(y_value>750)
+	while(y_value>950)
 	{
 		digitalWrite(dir2,1);
 		digitalWrite(stp2,1);
@@ -206,5 +217,18 @@ void dec(){
 }
 
 void mode(){
+
+}
+
+void comparacion(){
+	
+}
+
+void getObj(){
+Serial.print(":Gr#");
+String get_Obj=Serial.readStringUntil('#');
+String get_ObjHH= get_Obj.substring(0,3);
+String get_ObjMM= get_Obj.substring(3,6);
+String get_ObjSS= get_Obj.substring(6);
 
 }
